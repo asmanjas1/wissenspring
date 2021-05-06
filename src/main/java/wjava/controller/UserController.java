@@ -44,9 +44,9 @@ public class UserController {
 		return userService.getAllRefs();
 	}
 	
-	//ToDo: implement an end point which will get all the refs for a particular techName
+	//ToDo: implement an end point which will get all the refs for a particular techName ex: @Get, /getReference/{techName}
 	
-	//ToDo: Implement an end point to delete an reference record for a input ref ID
+	//ToDo: Implement an end point to delete an reference record for a input ref ID ex: @Delete, /deleteReference/{id}
 	
 	//Reference end
 	
@@ -62,9 +62,9 @@ public class UserController {
 		return userService.getAllQuizs();
 	}
 	
-	//ToDo: implement an end point which will get all the quizs for a particular techName
+	//ToDo: implement an end point which will get all the quizs for a particular techName ex: @Get, /getQuiz/{techName}
 	
-	//ToDo: Implement an end point to delete a quiz record for a input quiz ID
+	//ToDo: Implement an end point to delete a quiz record for a input quiz ID ex: @Delete, /deleteQuiz/{id}
 	
 	// Question answer end
 
