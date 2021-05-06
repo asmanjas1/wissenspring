@@ -8,6 +8,7 @@ public class User {
 	private String email;
 	private String password;
 	private Date registrationDate;
+	private Boolean isAdmin;
 	
 	public Integer getUserId() {
 		return userId;
@@ -39,6 +40,11 @@ public class User {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	
 }
