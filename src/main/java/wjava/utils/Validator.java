@@ -7,6 +7,7 @@ import static java.util.Objects.nonNull;
 import org.springframework.stereotype.Service;
 
 import wjava.beans.User;
+import wjava.entity.QuizEntity;
 import wjava.entity.ReferenceEntity;
 
 @Service
@@ -30,6 +31,15 @@ public class Validator {
 	public boolean validateReference(ReferenceEntity ref) {
 		if (nonNull(ref) && !isNullOrEmpty(ref.getLink()) && !isNullOrEmpty(ref.getTechName())
 				&& !isNullOrEmpty(ref.getTitle())) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean validateQuiz(QuizEntity entity) {
+		if (nonNull(entity) && !isNullOrEmpty(entity.getTechName()) && !isNullOrEmpty(entity.getQuestion())
+				&& !isNullOrEmpty(entity.getOption1()) && !isNullOrEmpty(entity.getOption2())
+				&& !isNullOrEmpty(entity.getOption3()) && !isNullOrEmpty(entity.getOption4())) {
 			return true;
 		}
 		return false;

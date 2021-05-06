@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import wjava.beans.User;
+import wjava.entity.QuizEntity;
 import wjava.entity.ReferenceEntity;
 import wjava.entity.UserEntity;
+import wjava.repository.QuizRepository;
 import wjava.repository.ReferenceRepository;
 import wjava.repository.UserRepository;
 import wjava.utils.Validator;
@@ -20,6 +22,9 @@ public class UserService {
 	
 	@Autowired
 	private ReferenceRepository refRepository;
+	
+	@Autowired
+	private QuizRepository quizRepository;
 	
 	@Autowired
 	private Validator validator;
@@ -74,6 +79,19 @@ public class UserService {
 	
 	public List<ReferenceEntity> getAllRefs() {
 		return refRepository.findAll();
+	}
+	
+	public String saveQuiz(QuizEntity entity) throws Exception {
+		if(!validator.validateQuiz(entity))
+			throw new Exception("Please provide valid Quiz data");
+		
+		quizRepository.saveAndFlush(entity);
+		
+		return "Successfully saved Quiz";
+	}
+	
+	public List<QuizEntity> getAllQuizs() {
+		return quizRepository.findAll();
 	}
 
 	

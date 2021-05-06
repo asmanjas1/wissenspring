@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import wjava.beans.User;
+import wjava.entity.QuizEntity;
 import wjava.entity.ReferenceEntity;
 import wjava.entity.UserEntity;
 import wjava.service.UserService;
@@ -51,7 +52,20 @@ public class UserController {
 	
 	// Question answer start
 	
-	//for akshay implement an end point to save quiz same as we saving reference
+	@PostMapping(value = "/saveQuiz")
+	public String saveQuiz(@RequestBody QuizEntity entity) throws Exception {
+		return userService.saveQuiz(entity);
+	}
 	
+	@GetMapping(value = "/getAllQuiz")
+	public List<QuizEntity> getAllQuizs(){
+		return userService.getAllQuizs();
+	}
+	
+	//ToDo: implement an end point which will get all the quizs for a particular techName
+	
+	//ToDo: Implement an end point to delete a quiz record for a input quiz ID
+	
+	// Question answer end
 
 }
