@@ -1,8 +1,10 @@
 package wjava.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,9 @@ import wjava.service.UserService;
 @RequestMapping(value = "/userController")
 @RestController
 public class UserController {
+	
+	@Value("${technologyMap}")
+	private String[] technologyMap;
 
 	@Autowired
 	private UserService userService;
@@ -31,6 +36,12 @@ public class UserController {
 	@PostMapping(value = "/login")
 	public User doLogin(@RequestBody User user) throws Exception {
 		return userService.doLogin(user);
+	}
+	
+	@GetMapping(value = "/getAllTech")
+	public List<String> getAllTech(){
+		List<String> list = Arrays.asList(technologyMap);
+		return list;
 	}
 	
 	// Reference start
