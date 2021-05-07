@@ -19,10 +19,10 @@ public class ReferenceEntity {
 	@Column(name = "techname")
 	private String techName;
 	
-	@Column(name = "title", length = 10000)
+	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "link", length = 10000)
+	@Column(name = "link")
 	private String link;
 
 	public Integer getId() {

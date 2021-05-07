@@ -16,19 +16,19 @@ public class QuizEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name = "question", length = 999999999)
+	@Column(name = "question")
 	private String question;
 	
-	@Column(name = "option1", length = 99999)
+	@Column(name = "option1")
 	private String option1;
 	
-	@Column(name = "option2", length = 99999)
+	@Column(name = "option2")
 	private String option2;
 	
-	@Column(name = "option3", length = 99999)
+	@Column(name = "option3")
 	private String option3;
 	
-	@Column(name = "option4", length = 99999)
+	@Column(name = "option4")
 	private String option4;
 	
 	@Column(name = "answer")
