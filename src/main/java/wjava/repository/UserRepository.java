@@ -12,7 +12,8 @@ import wjava.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	
 	UserEntity findByEmail(String email);
-
+	
+	
 	@Transactional(readOnly = true)
 	UserEntity findByEmailAndPassword(String email, String password);
 

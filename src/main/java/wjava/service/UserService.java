@@ -1,8 +1,10 @@
 package wjava.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import wjava.beans.User;
@@ -19,21 +21,21 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private ReferenceRepository refRepository;
-	
+
 	@Autowired
 	private QuizRepository quizRepository;
-	
+
 	@Autowired
 	private Validator validator;
 
 	public UserEntity signUp(User user) throws Exception {
 		UserEntity ue = null;
-		if(validator.validateUserForSignUp(user)) {
+		if (validator.validateUserForSignUp(user)) {
 			ue = userRepository.findByEmail(user.getEmail());
-			if( ue == null ) {
+			if (ue == null) {
 				UserEntity userEntity = new UserEntity();
 				userEntity.setEmail(user.getEmail());
 				userEntity.setIsAdmin(false);
@@ -50,13 +52,12 @@ public class UserService {
 		return ue;
 	}
 
-
 	public User doLogin(User user) throws Exception {
-		if(validator.validateUserForLogin(user)) {
+		if (validator.validateUserForLogin(user)) {
 			UserEntity ue = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
-			if(ue == null )
+			if (ue == null)
 				throw new Exception("Please enter valid email/password");
-			
+
 			user.setName(ue.getName());
 			user.setRegistrationDate(ue.getRegistrationDate());
 			user.setUserId(ue.getUserId());
@@ -69,30 +70,63 @@ public class UserService {
 	}
 
 	public String saveReference(ReferenceEntity entity) throws Exception {
-		if(!validator.validateReference(entity))
+		if (!validator.validateReference(entity))
 			throw new Exception("Please provide valid Reference data");
-		
+
 		refRepository.saveAndFlush(entity);
-		
+
 		return "Successfully saved Reference";
 	}
-	
+
 	public List<ReferenceEntity> getAllRefs() {
 		return refRepository.findAll();
 	}
-	
+
 	public String saveQuiz(QuizEntity entity) throws Exception {
-		if(!validator.validateQuiz(entity))
+		if (!validator.validateQuiz(entity))
 			throw new Exception("Please provide valid Quiz data");
-		
+
 		quizRepository.saveAndFlush(entity);
-		
+
 		return "Successfully saved Quiz";
 	}
-	
+
 	public List<QuizEntity> getAllQuizs() {
 		return quizRepository.findAll();
 	}
 
+	public List<ReferenceEntity> getTechByName(String techName) throws Exception {
+		List<ReferenceEntity> tech = refRepository.findByTechName(techName);
+		 System.out.println(tech);
+		if (!tech.isEmpty()) {
+			
+			return  tech;
+		}
+		
+		throw new Exception("No record");
+
+	}
 	
+	public   void  deleteReferenceById(Integer id) throws Exception 
+		 {
+		        Optional<ReferenceEntity> reffID = refRepository.findById(id);
+		         
+		        if(reffID.isPresent())
+		        {
+		        	refRepository.delete(id);
+		        } else {
+		            throw new Exception("Id not exist");
+		        }
+				 
+		
+		
+
+	}
+	
+	public List<QuizEntity> getQuiz(String techName) {
+	       
+        return (List<QuizEntity>) quizRepository.findBytechName(techName);
+    }
+	
+
 }
