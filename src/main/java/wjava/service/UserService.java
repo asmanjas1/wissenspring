@@ -3,6 +3,7 @@ package wjava.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -95,6 +96,7 @@ public class UserService {
 		return quizRepository.findAll();
 	}
 
+<<<<<<< HEAD
 	public List<ReferenceEntity> getTechByName(String techName) throws Exception {
 		List<ReferenceEntity> tech = refRepository.findByTechName(techName);
 		 System.out.println(tech);
@@ -130,3 +132,21 @@ public class UserService {
 	
 
 }
+=======
+	  public String deleteQuiz(int id) throws Exception { 
+		  
+		  quizRepository.delete(id);
+	  return "Successfully deleted Quiz"; 
+	  }
+	   
+	public List<QuizEntity> getQuiz(String techName) {
+		
+		return (List<QuizEntity>) quizRepository.findBytechName(techName);
+	}
+	
+	
+
+		
+	}
+
+>>>>>>> f5b258df9c588ac9267befcd96a5b9979d405449

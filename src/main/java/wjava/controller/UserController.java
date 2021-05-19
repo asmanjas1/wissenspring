@@ -6,9 +6,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+<<<<<<< HEAD
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+=======
+>>>>>>> f5b258df9c588ac9267befcd96a5b9979d405449
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,11 +97,7 @@ public class UserController {
 	}
 	
 	
-	@GetMapping(value = "/getQuiz/{techName}")
-    public List<QuizEntity> getQuiz(@PathVariable("techName") String techName)
-    {
-        return userService.getQuiz(techName);
-    }
+	
 
 	// ToDo: implement an end point which will get all the quizs for a particular
 	// techName ex: @Get, /getQuiz/{techName}
@@ -107,5 +106,18 @@ public class UserController {
 	// @Delete, /deleteQuiz/{id}
 
 	// Question answer end
+	
+	@DeleteMapping (value = "/deleteQuiz/{id}")
+	
+	private String deleteQuiz(@PathVariable("id") int id)   throws Exception
+	{  
+		return userService.deleteQuiz(id);
+	}  
+	@GetMapping(value = "/getQuiz/{techName}")
+	public List<QuizEntity> getQuiz(@PathVariable("techName") String techName)
+	{
+		return userService.getQuiz(techName);
+	}
+	
 
 }
