@@ -2,6 +2,7 @@ package wjava.service;
 
 import java.util.List;
 
+import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,5 +95,19 @@ public class UserService {
 		return quizRepository.findAll();
 	}
 
+	  public String deleteQuiz(int id) throws Exception { 
+		  
+		  quizRepository.delete(id);
+	  return "Successfully deleted Quiz"; 
+	  }
+	   
+	public List<QuizEntity> getQuiz(String techName) {
+		
+		return (List<QuizEntity>) quizRepository.findBytechName(techName);
+	}
 	
-}
+	
+
+		
+	}
+

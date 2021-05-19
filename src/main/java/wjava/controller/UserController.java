@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,5 +80,18 @@ public class UserController {
 	//ToDo: Implement an end point to delete a quiz record for a input quiz ID ex: @Delete, /deleteQuiz/{id}
 	
 	// Question answer end
+	
+	@DeleteMapping (value = "/deleteQuiz/{id}")
+	
+	private String deleteQuiz(@PathVariable("id") int id)   throws Exception
+	{  
+		return userService.deleteQuiz(id);
+	}  
+	@GetMapping(value = "/getQuiz/{techName}")
+	public List<QuizEntity> getQuiz(@PathVariable("techName") String techName)
+	{
+		return userService.getQuiz(techName);
+	}
+	
 
 }
