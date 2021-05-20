@@ -2,20 +2,15 @@ package wjava.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-<<<<<<< HEAD
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-=======
->>>>>>> f5b258df9c588ac9267befcd96a5b9979d405449
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,11 +43,9 @@ public class UserController {
 
 	@GetMapping(value = "/getAllTech")
 	public List<String> getAllTech() {
-		List<String> list = Arrays.asList(technologyMap);
-		return list;
+		return Arrays.asList(technologyMap);
 	}
 
-	// Reference start
 	@PostMapping(value = "/saveReference")
 	public String saveReference(@RequestBody ReferenceEntity entity) throws Exception {
 		return userService.saveReference(entity);
@@ -64,11 +57,8 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/getReference/{techName}")
-	public List<ReferenceEntity> getTechByName(@PathVariable("techName") String techName) throws Exception {
-
-		return userService.getTechByName(techName);
-		// return new List<ReferenceEntity>(entity, new HttpHeaders(), HttpStatus.OK);
-
+	public List<ReferenceEntity> getReference(@PathVariable("techName") String techName) throws Exception {
+		return userService.getReference(techName);
 	}
 
 	@DeleteMapping("/deleteReference/{id}")
@@ -76,15 +66,6 @@ public class UserController {
 		userService.deleteReferenceById(id);
 		return HttpStatus.FORBIDDEN;
 	}
-	// ToDo: implement an end point which will get all the refs for a particular
-	// techName ex: @Get, /getReference/{techName}
-
-	// ToDo: Implement an end point to delete an reference record for a input ref ID
-	// ex: @Delete, /deleteReference/{id}
-
-	// Reference end
-
-	// Question answer start
 
 	@PostMapping(value = "/saveQuiz")
 	public String saveQuiz(@RequestBody QuizEntity entity) throws Exception {
@@ -95,29 +76,25 @@ public class UserController {
 	public List<QuizEntity> getAllQuizs() {
 		return userService.getAllQuizs();
 	}
-	
-	
-	
 
-	// ToDo: implement an end point which will get all the quizs for a particular
-	// techName ex: @Get, /getQuiz/{techName}
-
-	// ToDo: Implement an end point to delete a quiz record for a input quiz ID ex:
-	// @Delete, /deleteQuiz/{id}
-
-	// Question answer end
-	
-	@DeleteMapping (value = "/deleteQuiz/{id}")
-	
-	private String deleteQuiz(@PathVariable("id") int id)   throws Exception
-	{  
+	@DeleteMapping(value = "/deleteQuiz/{id}")
+	private String deleteQuiz(@PathVariable("id") int id) throws Exception {
 		return userService.deleteQuiz(id);
-	}  
+	}
+
 	@GetMapping(value = "/getQuiz/{techName}")
-	public List<QuizEntity> getQuiz(@PathVariable("techName") String techName)
-	{
+	public List<QuizEntity> getQuiz(@PathVariable("techName") String techName) {
 		return userService.getQuiz(techName);
 	}
 	
+	@GetMapping(value = "/getUser/{userId}")
+	public UserEntity getUser(@PathVariable("userId") Integer userId) {
+		return userService.getUser(userId);
+	}
+	
+	@PutMapping(value = "/updateUser")
+	public String updateUser(@RequestBody UserEntity user) {
+		return userService.updateUser(user);
+	}
 
 }

@@ -1,12 +1,16 @@
 package wjava.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,7 +45,17 @@ public class UserEntity {
 	
 	@Column(name = "isadmin")
 	private Boolean isAdmin;
-
+	
+	@Column(name = "phone")
+	private String phone;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="userid", nullable=false)
+	private List<SkillEntity> skills;
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -89,5 +103,38 @@ public class UserEntity {
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public List<SkillEntity> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<SkillEntity> skills) {
+		this.skills = skills;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", registrationDate=" + registrationDate + ", isAdmin=" + isAdmin + ", phone=" + phone + ", address="
+				+ address + ", skills=" + skills + "]";
+	}
+	
+	
 	
 }

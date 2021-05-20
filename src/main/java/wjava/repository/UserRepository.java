@@ -13,11 +13,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	
 	UserEntity findByEmail(String email);
 	
-	
 	@Transactional(readOnly = true)
 	UserEntity findByEmailAndPassword(String email, String password);
 
 	@Query("from UserEntity where email =:email and password =:password")
 	UserEntity fetchUser(@Param("email") String email, @Param("password") String password);
+	
+	UserEntity findByUserId(Integer userId);
 	
 }

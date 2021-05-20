@@ -3,9 +3,7 @@ package wjava.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import wjava.beans.User;
@@ -96,57 +94,63 @@ public class UserService {
 		return quizRepository.findAll();
 	}
 
-<<<<<<< HEAD
-	public List<ReferenceEntity> getTechByName(String techName) throws Exception {
+	public List<ReferenceEntity> getReference(String techName) throws Exception {
 		List<ReferenceEntity> tech = refRepository.findByTechName(techName);
-		 System.out.println(tech);
 		if (!tech.isEmpty()) {
-			
-			return  tech;
+			return tech;
 		}
-		
 		throw new Exception("No record");
 
 	}
-	
-	public   void  deleteReferenceById(Integer id) throws Exception 
-		 {
-		        Optional<ReferenceEntity> reffID = refRepository.findById(id);
-		         
-		        if(reffID.isPresent())
-		        {
-		        	refRepository.delete(id);
-		        } else {
-		            throw new Exception("Id not exist");
-		        }
-				 
-		
-		
 
+	public void deleteReferenceById(Integer id) throws Exception {
+		Optional<ReferenceEntity> reffID = refRepository.findById(id);
+		if (reffID.isPresent()) {
+			refRepository.delete(id);
+		} else {
+			throw new Exception("Id not exist");
+		}
+	}
+
+	public List<QuizEntity> getQuiz(String techName) {
+		return quizRepository.findBytechName(techName);
+	}
+
+	public String deleteQuiz(int id) throws Exception {
+		quizRepository.delete(id);
+		return "Successfully deleted Quiz";
 	}
 	
-	public List<QuizEntity> getQuiz(String techName) {
-	       
-        return (List<QuizEntity>) quizRepository.findBytechName(techName);
-    }
+	public UserEntity getUser(Integer userId) {
+		return userRepository.findByUserId(userId);
+	}
 	
+	
+	public String updateUser( UserEntity user) {
+		UserEntity userEntity = userRepository.findByUserId(user.getUserId());
+		
+		if( userEntity == null )
+			return "No User With Passed userId";
+		
+		if(user.getName() != null) {
+			userEntity.setName(user.getName());
+		}
+		
+		if(user.getPhone() != null) {
+			userEntity.setPhone(user.getPhone());
+		}
+		
+		if(user.getAddress() != null) {
+			userEntity.setAddress(user.getAddress());
+		}
+		
+		if(user.getSkills() != null && user.getSkills().size() > 0) {
+			userEntity.setSkills(user.getSkills());
+		}
+		
+		userRepository.saveAndFlush(userEntity);
+		
+		return "Successfully updated User with Given Data";
+	}
 
 }
-=======
-	  public String deleteQuiz(int id) throws Exception { 
-		  
-		  quizRepository.delete(id);
-	  return "Successfully deleted Quiz"; 
-	  }
-	   
-	public List<QuizEntity> getQuiz(String techName) {
-		
-		return (List<QuizEntity>) quizRepository.findBytechName(techName);
-	}
-	
-	
-
-		
-	}
-
->>>>>>> f5b258df9c588ac9267befcd96a5b9979d405449
