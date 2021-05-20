@@ -152,5 +152,9 @@ public class UserService {
 		
 		return "Successfully updated User with Given Data";
 	}
+	
+	public List<UserEntity> getAllUser () {
+		return userRepository.findAll();
+	}
 
 }

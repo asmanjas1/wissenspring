@@ -96,5 +96,10 @@ public class UserController {
 	public String updateUser(@RequestBody UserEntity user) {
 		return userService.updateUser(user);
 	}
+	
+	@GetMapping(value = "/getAllUser")
+	public List<UserEntity> getAllUser() {
+		return userService.getAllUser();
+	}
 
 }
