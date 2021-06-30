@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories(basePackages="wjava.repository")
-@EntityScan(basePackages = "wjava.entity")
+//@EntityScan(basePackages = "wjava.entity")
 @SpringBootApplication
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 public class WissenWebApplication {
 
 	public static void main(String[] args) throws Exception {

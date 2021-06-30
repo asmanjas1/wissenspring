@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import wjava.beans.User;
 import wjava.entity.QuizEntity;
 import wjava.entity.ReferenceEntity;
+import wjava.entity.TrainingMaterialEntity;
 import wjava.entity.UserEntity;
 import wjava.service.UserService;
 
@@ -101,5 +102,17 @@ public class UserController {
 	public List<UserEntity> getAllUser() {
 		return userService.getAllUser();
 	}
-
+	
+	//-----------------------------------------------------------------------// 
+	// started Training Material Coding 
+	
+	@PostMapping(value = "/saveQuestion")
+	public String saveQuestion(@RequestBody TrainingMaterialEntity  entity) throws Exception {
+		return userService.saveQuestion(entity);
+	}
+	
+	@GetMapping(value = "/getAllQuestion")
+	public List<TrainingMaterialEntity> getAllQuestion() {
+		return userService.getAllQuestion();
+	}
 }

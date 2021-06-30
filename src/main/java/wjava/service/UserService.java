@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import wjava.beans.User;
 import wjava.entity.QuizEntity;
 import wjava.entity.ReferenceEntity;
+import wjava.entity.TrainingMaterialEntity;
 import wjava.entity.UserEntity;
 import wjava.repository.QuizRepository;
 import wjava.repository.ReferenceRepository;
+import wjava.repository.TrainingMaterialRepo;
 import wjava.repository.UserRepository;
 import wjava.utils.Validator;
 
@@ -155,6 +157,18 @@ public class UserService {
 	
 	public List<UserEntity> getAllUser () {
 		return userRepository.findAll();
+	}
+	
+	@Autowired
+	private TrainingMaterialRepo materialRepo;
+	public String saveQuestion(TrainingMaterialEntity entity ) {
+		
+		materialRepo.saveAndFlush(entity);
+		return "Successfully saved Training Material with Given Data";
+	}
+	
+	public List<TrainingMaterialEntity> getAllQuestion() {
+		return materialRepo.findAll();
 	}
 
 }

@@ -11,7 +11,6 @@ import wjava.entity.QuizEntity;
 @Repository
 public interface QuizRepository extends JpaRepository<QuizEntity, Integer>{
 	
-	
 	@Transactional(readOnly = true)
 	List<QuizEntity> findBytechName(String techName);
 
